@@ -9,7 +9,7 @@ char answer_pool[10]={'a','b','c','d','d','c','b','a','a','b'};
 char question_flipquestion[1][200]={"bq"};
 char question_flipquestion_fiftyfifty[1][200]={"bqf"};
 char answer_flipquestion='c';
-int prize_money_pool[10]={100,200,300,400,500,600,700,800,900,1000};
+int prize_money_pool[10]={1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000};
 int prize_money=0;
 int flag_wrong_answer=0;
 char option;
