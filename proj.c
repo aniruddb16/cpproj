@@ -153,7 +153,7 @@ int main()
       puts(question_pool[i]);
       input();
       if (option=='e' && lifeline_fiftyfifty==0)
-      {
+      { lifeline_fiftyfifty=1;
         system("clear");
         puts(question_pool_fiftyfifty[i]);
         input();
