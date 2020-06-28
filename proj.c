@@ -52,7 +52,6 @@ char answer_flipquestion='c';
 
 int prize_money_pool[10]={1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000};
 int prize_money=0;
-int flag_wrong_answer=0;
 char option;
 int lifeline_fiftyfifty=0;
 int lifeline_flipquestion=0;
@@ -60,63 +59,30 @@ int lifelines_left;
 int i;
 int questions_left;
 int exit_status=0;
-int flag_ff;
-int flag_fq;
+
 
 void disp_ll()
 {
   printf("\n Lifelines Left : \n");
   if(lifeline_fiftyfifty==0)
-   printf(" 1. Fifty Fifty\t\t\t");
+   printf("Fifty Fifty\t\t\t");
   if(lifeline_flipquestion==0)
-   printf(" 2. Flip the Question\t\t\t");
+   printf(" Flip the Question\t\t\t");
   printf("\n");
 }
 
-void lifelinecheck_fiftyfifty(char c)
-{
-   if(c=='e'&& lifeline_fiftyfifty==1)
-   {
-     printf("you have already used fifty fifty please input again");
-     scanf("%c",&option);
-     getchar();
-     printf("\n");
-     option=tolower(option);
-     lifelinecheck_fiftyfifty(option);
-   }
-}
-void lifelinecheck_flipquestion(char c)
-{
-   if(c=='f'&& lifeline_flipquestion==1)
-   {
-     printf("you have already used flip question please input again");
-     scanf("%c",&option);
-     getchar();
-     printf("\n");
-     option=tolower(option);
-     lifelinecheck_flipquestion(option);
-   }
-}
+
 
 void input()
 {disp_ll();
-printf("\n\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
+printf("WARNING: ENTERING  LIFELINE WHICH IS NOT AVAILABLE WILL LEAD TO LOSS A GAME");
+printf("\n\nEnter option ('e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
 scanf("%c",&option);
 getchar();
 printf("\n");
 option=tolower(option);
-lifelinecheck_fiftyfifty(option);
-lifelinecheck_flipquestion(option);
 }
 
-void reset_globals()
-{
-  prize_money=0;
-  flag_wrong_answer=0;
-  lifeline_fiftyfifty=0;
-  lifeline_flipquestion=0;
-  lifelines_left=2;
-}
 void winscreen()
 { system("clear");
   printf("congratulations! Your answer is correct! \n");
@@ -186,7 +152,6 @@ int main()
       }
       puts(question_pool[i]);
       input();
-      option=tolower(option);
       if (option=='e' && lifeline_fiftyfifty==0)
       {
         system("clear");
@@ -289,13 +254,6 @@ int main()
 
     }system("clear");
   } while(exit_status!=1);
-
-
-
-
 system("clear");
-
-
-
   return 0;
 }
