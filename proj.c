@@ -6,8 +6,8 @@ void openscreen()
 {
 printf("*******************WELCOME TO KAUN BANEGA CROREPATI************************* \n \n");
 printf("**************The total number of questions are 10************************** \n \n");
-printf("***************Intermediate question levels are 3 and 7********************* \n \n");
-printf("***************Prize money for each question is Rs. 10,00,000***************\n \n");
+printf("***************Intermediate question level is 4********************* \n \n");
+printf("***************prize money for each question is Rs. 10,00,000***************\n \n");
 printf("Lifelines available are \n 50-50: Two incorrect options will be eliminated and \n Flip the Question: A new question will be displayed to you. \n \n");
 printf("DO YOU HAVE WHAT IT TAKES TO BE A CROREPATI??? \n \n Press any key to begin \n \n");
 getchar();
@@ -199,7 +199,7 @@ int main()
             input();
             if(option==answer_flipquestion)
             {
-              prize_money+=prize_money_pool[i];
+              prize_money=prize_money_pool[i];
               winscreen();
             }
             else
@@ -213,7 +213,7 @@ int main()
 
         else if (option==answer_pool[i])
         {
-          prize_money+=prize_money_pool[i];
+          prize_money=prize_money_pool[i];
           winscreen();
         }
         else
@@ -238,7 +238,7 @@ int main()
 
           if(option==answer_flipquestion)
           {
-            prize_money+=prize_money_pool[i];
+            prize_money=prize_money_pool[i];
             winscreen();
           }
           else
@@ -252,7 +252,7 @@ int main()
 
         else if(option==answer_flipquestion)
         {
-          prize_money+=prize_money_pool[i];
+          prize_money=prize_money_pool[i];
           winscreen();
         }
         else
@@ -267,7 +267,7 @@ int main()
 
       else if(option==answer_pool[i])
       {
-        prize_money+=prize_money_pool[i];
+        prize_money=prize_money_pool[i];
         winscreen();
       }
 
