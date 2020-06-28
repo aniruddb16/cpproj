@@ -170,7 +170,7 @@ int main()
             else
             {
               lossscreen();
-              flag_wrong_answer=1;
+             
               break;
             }
 
@@ -184,7 +184,7 @@ int main()
         else
         {
           lossscreen();
-          flag_wrong_answer=1;
+          
           break;
         }
 
@@ -223,7 +223,7 @@ int main()
         else
         {
           lossscreen();
-          flag_wrong_answer=1;
+         
           break;
         }
 
@@ -246,7 +246,7 @@ int main()
       else
       {
         lossscreen();
-        flag_wrong_answer=1;
+        
         break;
       }
 
