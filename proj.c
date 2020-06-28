@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//globals
+
 void openscreen()
 {
 printf("*******************WELCOME TO KAUN BANEGA CROREPATI************************* \n \n");
@@ -14,6 +14,9 @@ getchar();
 system("clear");
 }
 
+
+
+//globals
 char question_pool[10][200]={"Q1. Which is the world's most valuable currency in terms of exchange rate? \nA.	United States Dollar \t\t\tB.	Bahraini Dinar\nC.	Great Britain Pound \t\t\tD.	Kuwaiti Dinar\n",
 "Q2. What is the national bird of the United States of America? \n A.	Peregrine falcon\t\t\tB.	Bald eagle \nC.	King vulture \t\t\tD.	Golden eagle \n",
 "Q3. Which dog breed's name in Chinese translates to 'puffy lion dog' in English? \nA.	Lhasa Apso \t\t\tB.	Chow-Chow\nC.	Xiasi \t\t\tD.	Shih Tzu \n",
@@ -43,7 +46,7 @@ char answer_pool[10]={'d','b','b','c','a','a','c','d','b','a'};
 //flipped question
 char question_flipquestion[1][200]={"Which of the following elements is named after the Scandinavian goddess of beauty and fertility? \nA.	Rhenium \t\t\tB.	Selenium \nC.	Vanadium \t\t\tD.	Erbium \n"};
 //flipped question with 50-50 options
-char question_flipquestion_fiftyfifty[1][200]={"bqfWhich of the following elements is named after the Scandinavian goddess of beauty and fertility? \nA.	 \t\t\tB.	Selenium \nC.	Vanadium \t\t\tD.	 \n"};
+char question_flipquestion_fiftyfifty[1][200]={"Which of the following elements is named after the Scandinavian goddess of beauty and fertility? \nA.	 \t\t\tB.	Selenium \nC.	Vanadium \t\t\tD.	 \n"};
 //answer to flipped question
 char answer_flipquestion='c';
 
@@ -57,6 +60,54 @@ int lifelines_left;
 int i;
 int questions_left;
 int exit_status=0;
+int flag_ff;
+int flag_fq;
+
+void disp_ll()
+{
+  printf("\n Lifelines Left : \n");
+  if(lifeline_fiftyfifty==0)
+   printf(" 1. Fifty Fifty\t\t\t");
+  if(lifeline_flipquestion==0)
+   printf(" 2. Flip the Question\t\t\t");
+  printf("\n");
+}
+
+void lifelinecheck_fiftyfifty(char c)
+{
+   if(c=='e'&& lifeline_fiftyfifty==1)
+   {
+     printf("you have already used fifty fifty please input again");
+     scanf("%c",&option);
+     getchar();
+     printf("\n");
+     option=tolower(option);
+     lifelinecheck_fiftyfifty(option);
+   }
+}
+void lifelinecheck_flipquestion(char c)
+{
+   if(c=='f'&& lifeline_flipquestion==1)
+   {
+     printf("you have already used flip question please input again");
+     scanf("%c",&option);
+     getchar();
+     printf("\n");
+     option=tolower(option);
+     lifelinecheck_flipquestion(option);
+   }
+}
+
+void input()
+{disp_ll();
+printf("\n\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
+scanf("%c",&option);
+getchar();
+printf("\n");
+option=tolower(option);
+lifelinecheck_fiftyfifty(option);
+lifelinecheck_flipquestion(option);
+}
 
 void reset_globals()
 {
@@ -67,7 +118,7 @@ void reset_globals()
   lifelines_left=2;
 }
 void winscreen()
-{
+{ system("clear");
   printf("congratulations! Your answer is correct! \n");
 
 	printf("your prize money is %d \n",prize_money);
@@ -86,7 +137,7 @@ void winscreen()
 }
 
 void exit_screen()
-{
+{ system("clear");
   printf("your prize money is %d \n",prize_money);
   exit_status=1;
   printf("Press any key to continue\n");
@@ -97,7 +148,7 @@ void exit_screen()
 
 
 void gamewon()
-{
+{ system("clear");
 	printf("congratulations! You have won the game! \n");
 	printf("your prize money is %d \n",prize_money);
   printf("Press any key to continue\n");
@@ -105,38 +156,24 @@ void gamewon()
 
 
 void lossscreen()
-{
+{ system("clear");
 	char response;
   if (prize_money<4000000)
    prize_money=0;
   else
    prize_money=4000000;
 	printf("That was the wrong answer. \n \n Unfortunately this is the end of your game. \n \n Your prize money is Rs. %d \n \n", prize_money);
-  printf("Press Q to quit or T to try again \n");
-	scanf("%c", &response);
-  getchar();
-	if(response=='Q'||response=='q')
-	{
-		exit_status=1;
-	}
-	else if(response=='T'||response=='t')
-	{
-        exit_status=1;
-	}
-	else
-	{
-    printf("INVALID RESPONSE");
     printf("Press any key to continue\n");
     getchar();
-    system("clear");
-    lossscreen();}
+    exit_status=1;
 }
 
 
 
 int main()
-{ openscreen();
-  do{
+{ system("clear");
+  openscreen();
+
   do {
     for ( i=0;i<=10;i++)
     { questions_left=10-(i+1);
@@ -148,30 +185,18 @@ int main()
         exit(0);
       }
       puts(question_pool[i]);
-      printf("\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
-      scanf("%c",&option);
-      getchar();
-      printf("\n");
+      input();
       option=tolower(option);
       if (option=='e' && lifeline_fiftyfifty==0)
       {
         system("clear");
         puts(question_pool_fiftyfifty[i]);
-        printf("\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
-        scanf("%c",&option);
-        getchar();
-        printf("\n");
-        option=tolower(option);
-        lifeline_fiftyfifty=1;
+        input();
         if(option=='f' && lifeline_flipquestion==0)
           { lifeline_flipquestion=1;
             system("clear");
             puts(question_flipquestion);
-            printf("\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
-            scanf("%c",&option);
-            getchar();
-            printf("\n");
-            option=tolower(option);
+            input();
             if(option==answer_flipquestion)
             {
               prize_money+=prize_money_pool[i];
@@ -182,7 +207,10 @@ int main()
               lossscreen();
               flag_wrong_answer=1;
               break;
-            }}
+            }
+
+          }
+
         else if (option==answer_pool[i])
         {
           prize_money+=prize_money_pool[i];
@@ -200,21 +228,13 @@ int main()
       { lifeline_flipquestion=1;
         system("clear");
         puts(question_flipquestion);
-        printf("\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
-        scanf("%c",&option);
-        getchar();
-        printf("\n");
-        option=tolower(option);
+      input();
 
         if (option=='e'&& lifeline_fiftyfifty==0)
         { lifeline_fiftyfifty=1;
           system("clear");
           puts(question_flipquestion_fiftyfifty);
-          printf("\nEnter option( 'e' for fifty fifty, 'f' for flip the question, 'g' to exit with money) : ");
-          scanf("%c",&option);
-          getchar();
-          printf("\n");
-          option=tolower(option);
+          input();
 
           if(option==answer_flipquestion)
           {
@@ -226,7 +246,10 @@ int main()
             lossscreen();
             flag_wrong_answer=1;
             break;
-          }}
+          }
+
+        }
+
         else if(option==answer_flipquestion)
         {
           prize_money+=prize_money_pool[i];
@@ -240,6 +263,7 @@ int main()
         }
 
       }
+
 
       else if(option==answer_pool[i])
       {
@@ -264,10 +288,9 @@ int main()
 
 
     }system("clear");
-  } while(flag_wrong_answer!=1);
+  } while(exit_status!=1);
 
-reset_globals();
-}while(exit_status!=1);
+
 
 
 system("clear");
